@@ -6,6 +6,8 @@ var logger = require("morgan");
 var cheerio = require("cheerio");
 
 var Article = require("./models/articles.js");
+var Note = require("./models/notes.js");
+
 
 mongoose.Promise = Promise;
 
@@ -32,7 +34,7 @@ db.once("open", function() {
 
 app.get("/scrape", function(req, res) {
 
-request("https://www.nytimes.com/section/technology?WT.nav=page&action=click&contentCollection=Tech&module=HPMiniNav&pgtype=Homepage&region=TopBar", function(error, response, html) {
+request("https://www.nytimes.com/section/technology", function(error, response, html) {
     var $ = cheerio.load(html);
     $("h2.headline").each(function(i, element) {
 
@@ -40,7 +42,6 @@ request("https://www.nytimes.com/section/technology?WT.nav=page&action=click&con
 
         result.title = $(element).text();
         result.link = $(element).children().attr("href");
-        result.summary = $(element).next().text();
 
             var entry = new Article(result);
         
@@ -72,6 +73,39 @@ app.get("/articles", function(req, res) {
   });
 });
 
+app.get("/articles/:id", function(req, res) {
+  Article.findOne({ "_id": req.params.id })
+  .populate("note")
+  .exec(function(error, doc) {
+    if (error) {
+      console.log(error);
+    }
+    else {
+      res.json(doc);
+    }
+  });
+});
+
+app.post("/articles/:id", function(req, res) {
+  var newNote = new Note(req.body);
+
+  newNote.save(function(error, doc) {
+    if (error) {
+      console.log(error);
+    }
+    else {
+      Article.findOneAndUpdate({ "_id": req.params.id }, { "note": doc._id })
+      .exec(function(err, doc) {
+        if (err) {
+          console.log(err);
+        }
+        else {
+          res.send(doc);
+        }
+      });
+    }
+  });
+});
 
 
 
