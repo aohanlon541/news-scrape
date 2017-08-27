@@ -1,0 +1,148 @@
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Canterbury";
+  src: url(canterbury.regular.ttf) format('truetype');
+}
+
+html, body {
+    margin: 0;
+    background-color: #fefefe;
+
+}
+
+h1 {
+      font-family: "Canterbury", serif;
+      text-align: center;
+      font-size: 4em;
+      line-height: .8em;
+}
+
+#header {
+    background-image: url(paper.png);
+    background-repeat: no-repeat;
+    background-position: top;
+    padding-bottom: 75px;
+    overflow: hidden;
+
+}
+
+hr {
+    width: 90%;
+    border-bottom: 1px solid #000;
+}
+
+#date {
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 10px;
+    text-transform: uppercase;
+}
+
+#btnDiv {
+    margin-left: 3em;
+}
+
+#scrapeBtn {
+    border: 2px solid #000;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-family: sans-serif;
+    color: #000;
+}
+
+#scrapeBtn:hover {
+    border: 2px solid grey;
+    color: grey;
+}
+
+#scrapeBtn:active {
+    border: 2px solid #000;
+    background-color: #000;
+    color: white;
+}
+
+#articles {
+    margin: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    text-align: center;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.article {
+    border: 2px solid black;
+    width: 30%;
+    padding: 40px 10px;
+    margin: 5px;
+}
+
+
+h2 {
+    font-size: 1.5em;
+}
+
+#notes {
+    background: #000;
+    color: #fff;
+    padding: 10px;
+    z-index: 1;
+    position: fixed;
+    width: 500px;
+    top: 0; 
+    right: 0;
+    bottom: 0;
+}
