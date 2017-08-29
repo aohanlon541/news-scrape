@@ -120,7 +120,6 @@ hr {
     flex-direction: row;
     text-align: center;
     overflow: hidden;
-    z-index: 0;
 }
 
 .article {
@@ -133,16 +132,4 @@ hr {
 
 h2 {
     font-size: 1.5em;
-}
-
-#notes {
-    background: #000;
-    color: #fff;
-    padding: 10px;
-    z-index: 1;
-    position: fixed;
-    width: 500px;
-    top: 0; 
-    right: 0;
-    bottom: 0;
 }

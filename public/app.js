@@ -1,7 +1,7 @@
 $.getJSON("/articles", function(data) {
   for (var i = 0; i < data.length; i++) {
     $("#articles").append(
-        "<div class='article'> <h2 data-id='" + data[i]._id + "'>" + data[i].title + "</h2>" +
+        "<div class='article' data-id='" + data[i]._id + "'> <h2>" + data[i].title + "</h2>" +
         "<a href='" + data[i].link + "' class='articleLink'>Read article</a>" +
         "</div>");
   }
@@ -9,17 +9,13 @@ $.getJSON("/articles", function(data) {
 
 $("#date").append(moment().format("MMMM Do YYYY"));
 
-$('.composeNote').click(function() {
-  $('#notes').animate({
-    height: 'toggle'
-  }, 1500, function() {
-  });
-});
 
-
-$(document).on("click", "h2", function() {
+$("#articles").on("click", "h2", function() {
   $("#notes").empty();
   var thisId = $(this).attr("data-id");
+  var previousThis = this;
+  // var thisA = $("h2", this);
+  // console.log(thisA);
 
   $.ajax({
     method: "GET",
@@ -27,8 +23,9 @@ $(document).on("click", "h2", function() {
   })
     .done(function(data) {
       console.log(data);
-      $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
-      $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+      
+      $(previousThis).append("<div id='noteForm'><textarea id='bodyinput' name='body'></textarea>"
+      + "<button data-id='" + data._id + "' id='savenote'>Save Note</button></div>");
 
       if (data.note) {
         $("#bodyinput").val(data.note.body);
@@ -49,9 +46,7 @@ $(document).on("click", "#savenote", function() {
   })
     .done(function(data) {
       console.log(data);
-      $("#notes").empty();
-    });
-
-  $("#titleinput").val("");
-  $("#bodyinput").val("");
+      $("#noteForm").empty();
+   });
 });
+ 
